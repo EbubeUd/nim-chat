@@ -9,7 +9,9 @@ proc parseMessage(data: string): Message =
  result.username = dataJson["username"].getStr()
  result.message = dataJson["message"].getStr()
 
-
+proc CreateMessage(username, message: string): string =
+  let temp = %{"username": %username, "message": %message}
+  result = $temp
 
 when isMainModule:
   block:
@@ -26,6 +28,7 @@ when isMainModule:
       doAssert true
     except:
       doAssert false
+  
     
     
 
