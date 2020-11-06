@@ -11,7 +11,7 @@ proc parseMessage(data: string): Message =
 
 proc CreateMessage(username, message: string): string =
   let temp = %{"username": %username, "message": %message}
-  result = $temp
+  result = $temp & "\c\l"
 
 when isMainModule:
   block:
@@ -28,7 +28,9 @@ when isMainModule:
       doAssert true
     except:
       doAssert false
-  
+  block:
+    let expected = """{"username":"dom","message":"hello"}""" & "\c\l"
+    doAssert CreateMessage("dom", "hello") == expected
     
     
 
