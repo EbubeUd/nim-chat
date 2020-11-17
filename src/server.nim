@@ -15,6 +15,9 @@ type
 proc newServer(): Server =
   Server(socket: newAsyncSocket(), clients: @[])
 
+proc `$` (client: Client): string = 
+  $client.id & $ "(" & client.netAddr & ")"
+
 
 proc processMessages(server: Server, client: Client) {.async.} = 
   while true:
