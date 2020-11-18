@@ -28,12 +28,14 @@ proc processMessages(server: Server, client: Client) {.async.} =
       echo "Connection closed!"
       return
     echo (client, " sent: ", line)
+    for c in server.clients:
+      if c.id != client.id and c.connected:
+        await c.socket.send(line & "\c\l")
     
     
 proc loop(server: Server, port= 7687) {.async.} =
   server.socket.bindAddr(Port(7687))
   server.socket.listen()
-  # there should be a while true in here, removed out of curiousity 
   while true:
     let (netAddr, clientSocket) = await server.socket.acceptAddr()
     echo "Accepted Connection from: ", netAddr
