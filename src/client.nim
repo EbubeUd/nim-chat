@@ -1,5 +1,5 @@
 ##  client component of the chat application
-import os, system, threadpool
+import os, system, threadpool, asyncdispatch, asyncnet
 
 if paramCount()==0:
   quit ("Please specify the server address, e.g. ./client localhost")
