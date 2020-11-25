@@ -62,5 +62,6 @@ proc loop(server: Server, port= 7687) {.async.} =
     asyncCheck processMessages(server, client)
 
 var server = newServer()
+echo("listening...")
 waitFor server.loop()
 
